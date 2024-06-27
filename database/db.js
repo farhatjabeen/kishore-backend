@@ -1,18 +1,25 @@
-const Sequelize = require("sequelize")
-const db ={}
-const sequelize = new Sequelize("student_details","root","1234",{
-    host:"localhost",
-    dialect:"mysql",
-    operatorsAliases:0,
-    pool:{
-       max:90,
-       min:0,
-       acquire:30000,
-       idle:10000 
-    }
-})
-db.sequelize= sequelize
+const Sequelize = require("sequelize");
+const fs = require("fs");
+const path = require("path");
 
-db.Sequelize= Sequelize
+const db = {};
+const sequelize = new Sequelize("student_details", "adminuser", "Doodle@123", {
+  host: "farhatsql.mysql.database.azure.com",
+  dialect: "mysql",
+  dialectOptions: {
+    ssl: {
+      ca: fs.readFileSync(path.resolve(__dirname, "DigiCertGlobalRootCA.crt.pem")),
+    },
+  },
+  pool: {
+    max: 90,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
+});
 
-module.exports = db
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+module.exports = db;
