@@ -38,7 +38,7 @@ users.post('/register',(req,res)=>{
                 res.json({token:token})
             })
             .catch(err=>{
-                res.send('error'+ error)
+                res.send('error'+ err)
             })
         }else{
             res.json({error:'user already existes'})
